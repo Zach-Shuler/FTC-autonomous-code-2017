@@ -1,0 +1,116 @@
+# FTC-autonomous-code-2017
+package com.example.zachshuler.autonomousclient;
+
+/** Zachary Shuler
+ * FTC Team 3886 "Quake"
+ * November 26, 2017
+ * Based on Brent Calabresi's Autonomous Program from 2 years ago.
+ */
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+
+
+public class AutonomousClient extends LinearOpMode {
+
+    HardwarePushbot robot = new HardwarePushbot();
+    private ElaspedTime runtime = new ElapsedTime();
+
+    static final double full_speed = 0.8;
+    static final double turn_speed = 0.6;
+
+    public void runOpMode() {
+        robot.init(hardwareMap);
+
+        // Wait for the game to start (driver presses PLAY)
+        waitForStart();
+
+        //Robot turns right for 1 second , from its initial starting position
+
+    private void pivot() {
+        robot.FrontRight.setPower(-turn_speed);
+        robot.FrontLeft.setPower(turn_speed);
+        robot.BackRight.setPower(turn_speed);
+        robot.BackLeft.setPower(-turn_speed);
+
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+        }
+    }
+
+    //Robot drives backwards for 2 seconds  and knocks off the jewel
+    private void move() {
+        robot.FrontRight.setPower(-full_speed);
+        robot.BackRight.setPower(-full_speed);
+        robot.FrontLeft.setPower(-full_speed);
+        robot.BackLeft.setPower(-full_speed);
+
+        runtime.reset();
+        while(opModeIsActive()&&(runtime.seconds()<2.0)) {
+        }
+        }
+
+
+    // Robot turns left for 3 seconds
+    private  void pivot2() {
+        robot.FrontRight.setPower(turn_speed);
+        robot.BackRight.setPower(-turn_speed);
+        robot.FrontLeft.setPower(-turn_speed);
+        robot.BackLeft.setPower(turn_speed);
+
+        runtime.reset();
+        while(opModeIsActive()&&(runtime.seconds()<3.0)){
+
+        }
+    }
+
+
+    //Robot drives forward towards the Cryptobox for 1.5 seconds
+    private void move2() {
+        robot.FrontRight.setPower(full_speed);
+        robot.BackRight.setPower(full_speed);
+        robot.FrontLeft.setPower(full_speed);
+        robot.BackLeft.setPower(full_speed);
+
+        runtime.reset();
+        while(opModeIsActive() && (runtime.seconds()<1.5)) {
+        }
+    }
+    //Robot turns left for 2 seconds to face the cryptobox
+
+    private void pivot3() {
+        FrontRight.setPower(turn_speed);
+        BackRight.setPower(-turn_speed);
+        FrontLeft.setPower(-turn_speed);
+        BackLeft.setPower(turn_speed);
+
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 2.0)) {
+        }
+    }
+
+    //Robot unloads glyph in the Cryptobox
+    private void unload() {
+        ArmMotor.setPower(full_speed);
+
+        runtime.reset();
+        while(opModeIsActive() && runtime.seconds()<0.25)) {
+
+        }
+
+
+        TreadLeft.setPower(-full_speed);
+        TreadRight.setPower(full_speed);
+
+        runtime.reset();
+        while(opModeIsActive() &&(runtime.seconds()<2.0)){
+
+        }
+
+    //End of Program. Robot will be parked in safe zone to score additional 10 points
+}
+
+    }
+}
+
