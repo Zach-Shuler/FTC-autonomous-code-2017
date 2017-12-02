@@ -1,0 +1,106 @@
+# FTC-autonomous-code-2017
+package com.example.zachshuler.autonomousclient;
+
+/** Zachary Shuler
+ * FTC Team 3886 "Quake"
+ * November 26, 2017
+ * Based on Brent Calabresi's Autonomous Program from 2 years ago.
+ */
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+
+public class AutonomousClient extends LinearOpMode {
+
+    DcMotor FrontRight;
+    DcMotor FrontLeft;
+    DcMotor BackRight;
+    DcMotor BackLeft;
+    DcMotor TreadLeft;
+    DcMotor TreadRight;
+    DcMotor ArmMotor;
+    final double full_speed = 0.8;
+    final double turn_speed = 0.6;
+    ]''
+    @Override
+    public void runOpMode () throws InterruptedException {
+        BackRight = hardwareMap.dcMotor.get("BackRight");
+        BackLeft = hardwareMap.dcMotor.get("BackLeft");
+        FrontRight = hardwareMap.dcMotor.get("FrontRight");
+        FrontLeft = hardwareMap.dcMotor.get("FrontLeft");
+        TreadLeft = hardwareMap.dcMotor.get("TreadLeft");
+        TreadRight = hardwareMap.dcMotor.get("TreadRight");
+        ArmMotor = hardwareMap.dcMotor.get("ArmMotor");
+        BackRight.setDirection((DcMotor.Direction.REVERSE));
+        FrontRight.setDirection((DcMotor.Direction.REVERSE));
+        TreadRight.setDirection((DcMotor.Direction.REVERSE));
+
+
+        // Wait for the game to start (driver presses PLAY)
+
+        //Robot turns right for 1 second , from its initial starting position
+
+
+        waitForStart();
+
+        FrontRight.setPower(-turn_speed);
+        FrontLeft.setPower(turn_speed);
+        BackRight.setPower(turn_speed);
+        BackLeft.setPower(-turn_speed);
+        sleep(1000);
+
+
+        //Robot drives backwards for 2 seconds  and knocks off the jewel
+
+        FrontRight.setPower(-full_speed);
+        BackRight.setPower(-full_speed);
+        FrontLeft.setPower(-full_speed);
+        BackLeft.se0022tPower(-full_speed);
+        sleep(1500);
+
+
+        // Robot turns left for 3 seconds
+        FrontRight.setPower(turn_speed);
+        BackRight.setPower(-turn_speed);
+        FrontLeft.setPower(-turn_speed);
+        BackLeft.setPower(turn_speed);
+        sleep(3000);
+
+
+        //Robot drives forward towards the Cryptobox for 1.5 seconds
+
+        FrontRight.setPower(full_speed);
+        BackRight.setPower(full_speed);
+        FrontLeft.setPower(full_speed);
+        BackLeft.setPower(full_speed);
+        sleep(1500);
+
+
+        //Robot turns left for 2 seconds to face the cryptobox
+
+
+        FrontRight.setPower(turn_speed);
+        BackRight.setPower(-turn_speed);
+        FrontLeft.setPower(-turn_speed);
+        BackLeft.setPower(turn_speed);
+        sleep(1500);
+
+
+        //Robot unloads glyph in the Cryptobox
+
+        ArmMotor.setPower(full_speed);
+        sleep(250);
+
+
+        TreadLeft.setPower(-full_speed);
+        TreadRight.setPower(full_speed);
+        sleep(2000);
+
+
+    }
+    //End of Program. Robot will be parked in safe zone to score additional 10 points
+}
+
